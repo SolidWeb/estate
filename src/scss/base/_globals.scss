@@ -47,9 +47,9 @@ html {
 }
 
 body {
-  --text-body-ff: var(--font-montserrat);
-  --text-body-fz: 1.8rem;
-  --text-body-lh: 1.5;
+  --text-body-ff: var(--font-golos);
+  --text-body-fz: 1.5rem;
+  --text-body-lh: 2.2rem;
 
   display: flex;
   flex-direction: column;
@@ -68,6 +68,16 @@ body {
   font-variant-numeric: lining-nums;
   @include bp-max($container-min-width) {
     overflow-x: auto;
+  }
+  @include bp-min(375px) {
+    overflow-x: auto;
+  }
+  @include bp-min(1440px) {
+    overflow-x: auto;
+  }
+  @include bp(md) {
+    --text-body-fz: 1.6rem;
+    --text-body-lh: 2.4rem;
   }
 
   &.no-transitions * {
@@ -183,7 +193,6 @@ a {
   transition-duration: var(--transition-duration-short);
   &:hover,
   &:focus-visible {
-    text-decoration-color: currentColor;
     color: var(--color-hover);
   }
   &:active {

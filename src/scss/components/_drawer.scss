@@ -4,11 +4,11 @@
 
 .drawer {
   position: fixed;
-  top: 0;
+  top: 7.6rem;
   z-index: 101;
   overflow: auto;
-  width: min(45rem, 85%);
-  height: 100%;
+  width: min(43rem, 100%);
+  height: calc(100% - 7.6rem);
   background-color: var(--color-white);
   transition: transform var(--transition-long-cubic);
 
@@ -56,4 +56,9 @@
   &.drawer--btt {
     transform: translateY(0%);
   }
+}
+
+.drawer-overlay.overlay {
+  top: 7.6rem;
+  height: calc(100% - 7.6rem);
 }

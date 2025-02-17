@@ -1,18 +1,19 @@
-a.header__logo(href='index.html')
-  +imageSVG('logo.svg', 'Site logo')
+a.logo(href='#!') Estate
 //- prettier-ignore
 +navbar([
-  { text: 'Forms & Dialogs', href: 'starter-forms-dialogs.html' }, 
-  { text: 'Sliders & Galleries', href: 'starter-sliders-galleries.html' },
-  { text: 'Common layouts', href: '#!', icon: 'chevron', submenu: [ 
-    { text: 'Банки', href: '#!' }, 
-    { text: 'Страховые компании', href: '#!' }, 
-    { text: 'Колл-центры', href: '#!' }, 
-    { text: 'IT', href: '#!' }, 
+  { text: 'Недвижимость', href: '#!', icon: 'chevron', submenu: [ 
+    { text: 'Жилая', href: '#!' }, 
+    { text: 'Коммерческая', href: '#!' }, 
+    { text: 'Инвестиционная', href: '#!' }, 
+    { text: 'Эксклюзивная', href: '#!' }, 
   ]},
+  { text: 'Услуги', href: '#!' }, 
+  { text: 'Блог', href: '#!' },
+  { text: 'О компании', href: '#!' },
 ])
 address.header__contacts
   .header__icons
     a(href='#!', title='Наш Telegram') #[+icon('telegram')]
-    a(href='#!', title='Наш WhatsApp') #[+icon('whatsapp', false)]
-  a.header__phone(href='#!') +7 (495) 555 35 35
+    a(href='#!', title='Наш WhatsApp') #[+icon('whatsapp')]
+  a.header__phone(href='tel:+79998548585') +7 999 854 85 85
+button.link.header__lang En

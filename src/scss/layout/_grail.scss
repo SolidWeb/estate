@@ -13,13 +13,9 @@
   min-width: rem($container-min-width);
   width: 100%;
   max-width: rem(map.get($container-viewport-sizes, $container-max-width));
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
   margin: 0 auto;
-  @include bp(md) {
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
-  }
 }
 
 // Viewport width container

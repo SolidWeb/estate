@@ -15,23 +15,32 @@
 // 900 > Black (Heavy)
 
 $fonts: (
-  'Montserrat Regular': (
-    'family': 'Montserrat',
-    'filename': 'montserrat-regular',
-    'alias': 'montserrat',
+  'Merriweather Regular': (
+    'family': 'Merriweather',
+    'filename': 'merriweather-regular',
+    'alias': 'merriweather',
+    'style': normal,
+    'weight': 400,
+    'serif': serif,
+    'root-var': '--font-merriweather',
+  ),
+  'Merriweather Bold': (
+    'family': 'Merriweather',
+    'filename': 'merriweather-bold',
+    'alias': 'merriweather',
+    'style': normal,
+    'weight': 700,
+    'serif': serif,
+    'root-var': '--font-merriweather',
+  ),
+  'Golos Text': (
+    'family': 'Golos Text',
+    'filename': 'golos-text-regular',
+    'alias': 'golos-text',
     'style': normal,
     'weight': 400,
     'serif': sans-serif,
-    'root-var': '--font-regular',
-  ),
-  'Montserrat Medium': (
-    'family': 'Montserrat',
-    'filename': 'montserrat-medium',
-    'alias': 'montserrat',
-    'style': normal,
-    'weight': 500,
-    'serif': sans-serif,
-    'root-var': '--font-medium',
+    'root-var': '--font-golos',
   ),
 );
 
@@ -64,7 +73,8 @@ $font-names: map.keys($fonts);
 :root {
   //! General font variables goes here
   // Add a variable for each font if $separated-font-classes are being used
-  --font-montserrat: 'Montserrat', sans-serif;
+  --font-merriweather: 'Merriweather', serif;
+  --font-golos: 'Golos Text', sans-serif;
 
   @if $separated-font-vars {
     @each $font, $props in $fonts {
@@ -133,7 +143,7 @@ $font-names: map.keys($fonts);
     }
   } @else {
     //! List each font family here
-    font-family: var(--font-montserrat);
+    font-family: var(--font-merriweather), var(--font-golos);
   }
 }
 
