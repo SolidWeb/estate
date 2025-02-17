@@ -1,0 +1,12 @@
+//- ** Icon component
+
+//-? +icon('search')
+//-? +icon('user', false)
+mixin icon(name, sprite = true)
+  if sprite
+    span.icon&attributes(attributes)
+      svg(width='1em', height='1em', fill='currentColor')
+        use(href=`svg/icons/sprite.svg?${svgSpriteHash}#${name}`)
+  else
+    span.icon&attributes(attributes)
+      +imageSVG(`icons/inline/${name}.svg`)

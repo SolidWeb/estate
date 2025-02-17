@@ -1,0 +1,41 @@
+/* Form validation */
+
+@use '../abstracts' as *;
+
+.error-label {
+  font-size: 1.2rem;
+  text-align: right;
+  color: var(--color-red);
+  @include bp(md) {
+    font-size: 1.4rem;
+  }
+}
+
+.error-field {
+  border-color: var(--color-red);
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-red);
+  }
+  &:active {
+    border-color: var(--color-red);
+  }
+}
+
+.input-checkbox.error-field {
+  & + .form__label {
+    color: var(--color-red);
+    .checkbox-input-control {
+      border-color: var(--color-red);
+    }
+  }
+  & ~ .error-label {
+    display: none;
+  }
+}
+
+.radio-fieldset--required:has(.input-radio.error-field) {
+  .radio-input-control {
+    border-color: var(--color-red);
+  }
+}

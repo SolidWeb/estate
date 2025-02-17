@@ -1,0 +1,13 @@
+//- ** Dropdown component
+
+//- ToDo: Dropdown aria
+mixin dropdown(buttonText, props = {})
+  - var buttonClass = props.buttonClass || 'button';
+  - var icon = props.icon || 'chevron';
+  .dropdown(data-dropdown, data-dropdown-select=props.select, data-dropdown-hover=props.hoverable)&attributes(attributes)
+    button.dropdown-button(data-dropdown-button, class=buttonClass) #[span.button-text !{ buttonText }]
+      if (props.icon || props.select)
+        +icon(icon)
+    .dropdown-container(data-dropdown-container)
+      .dropdown-content
+        block

@@ -1,0 +1,45 @@
+/*! General layout structure */
+
+@use '../abstracts' as *;
+@use 'sass:map';
+
+.page-wrapper {
+  flex: 1 0 auto;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.container {
+  min-width: rem($container-min-width);
+  width: 100%;
+  max-width: rem(map.get($container-viewport-sizes, $container-max-width));
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin: 0 auto;
+  @include bp(md) {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+}
+
+// Viewport width container
+.vw-container {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  // Offset right
+  &--right {
+    margin-left: initial;
+  }
+  // Offset left
+  &--left {
+    width: initial;
+  }
+
+  // Convert into normal container for the smallest viewport
+  @include bp-max(map.get($container-viewport-sizes, index-to-key(1, $container-viewport-sizes))) {
+    min-width: rem($container-min-width);
+    width: 100%;
+    margin-left: initial;
+  }
+}

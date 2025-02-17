@@ -1,0 +1,20 @@
+//- ** Plain img with auto substitution of width & height
+
+//-? +image('photo.jpg', 'Photo of a flower')
+mixin image(name, alt, src = '@img/')
+  - const dimensions = sizeOfImage(src.replace('@img', 'src/img') + name);
+
+  img(src=require(src + name), width=dimensions.width, height=dimensions.height, alt=alt)&attributes(attributes)
+
+//-? +imageSVG('logo.svg', 'Site logo')
+mixin imageSVG(name, alt, src = '@svg/')
+  - const dimensions = sizeOfImage(src.replace('@svg', 'src/svg') + name);
+  - const parentDir = path.basename(path.dirname(name));
+
+  img(
+    src=require(src + name),
+    width=dimensions.width,
+    height=dimensions.height,
+    alt=alt,
+    class={ 'inline-svg': parentDir === 'inline' }
+  )&attributes(attributes)

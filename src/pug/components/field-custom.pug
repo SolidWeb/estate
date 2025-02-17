@@ -1,0 +1,7 @@
+//- ** Component for putting custom templates into the main form component
+
+mixin fieldCustom(props)
+  if (props.template === 'messengers')
+    .form__messengers Если у вас срочный вопрос, вы можете написать нам в мессенджерах.
+  if (props.template === 'reset-password-link')
+    a.link(href='#!') Забыли пароль?

@@ -1,0 +1,7 @@
+//- ** Form submit component
+
+mixin fieldSubmit(props)
+  if (props.icon)
+    button.button.form__submit(class=props.buttonClass, type='submit', aria-label=props.aria) #[+icon(props.icon)] #[span.button-text #{ props.submitText }]
+  else
+    input.button.form__submit(class=props.buttonClass, type='submit', value=props.submitText)

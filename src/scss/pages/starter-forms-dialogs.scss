@@ -1,0 +1,19 @@
+/*! Forms & Dialogs page */
+
+@use '../abstracts' as *;
+
+.forms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
+.form-wrapper {
+  width: 100%;
+  @include bp(md) {
+    flex: 1 0 0;
+  }
+  .form + .button {
+    margin-top: 1rem;
+  }
+}

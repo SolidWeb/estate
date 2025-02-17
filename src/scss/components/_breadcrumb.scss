@@ -1,0 +1,48 @@
+/* Breadcrumb */
+
+@use '../abstracts/' as *;
+
+.breadcrumb {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  color: var(--color-gray-2);
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
+}
+
+.breadcrumb__item {
+  display: flex;
+  // Current page link cursor
+  cursor: text;
+
+  &::after {
+    content: '/';
+    padding: 0 0.4rem;
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+}
+
+.breadcrumb__link {
+  text-decoration-color: transparent;
+  color: inherit;
+  &:hover,
+  &:focus-visible {
+    color: var(--color-red);
+  }
+  &:active {
+    color: inherit;
+  }
+
+  &--current-page {
+    color: var(--color-grey-3);
+    pointer-events: none;
+  }
+}

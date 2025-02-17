@@ -1,0 +1,36 @@
+/*! Links */
+
+@use '../abstracts' as *;
+
+.link {
+  --td-color: transparent;
+  --td-color-hover: currentColor;
+  --color: var(--content-link-color);
+  --color-hover: var(--content-link-color-hover);
+  --color-active: var(--content-link-color-active);
+
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  line-height: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--td-color);
+  background-color: transparent;
+  color: var(--color);
+  transition-property: transform, opacity, var(--transition-props-color);
+  transition-timing-function: var(--transition-func-cubic);
+  transition-duration: var(--transition-duration-short);
+  &:hover,
+  &:focus-visible {
+    text-decoration-color: var(--td-color-hover);
+    color: var(--color-hover);
+  }
+  &:active {
+    color: var(--color-active);
+  }
+
+  &--inline {
+    display: inline;
+  }
+}

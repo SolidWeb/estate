@@ -1,0 +1,18 @@
+a.header__logo(href='index.html')
+  +imageSVG('logo.svg', 'Site logo')
+//- prettier-ignore
++navbar([
+  { text: 'Forms & Dialogs', href: 'starter-forms-dialogs.html' }, 
+  { text: 'Sliders & Galleries', href: 'starter-sliders-galleries.html' },
+  { text: 'Common layouts', href: '#!', icon: 'chevron', submenu: [ 
+    { text: 'Банки', href: '#!' }, 
+    { text: 'Страховые компании', href: '#!' }, 
+    { text: 'Колл-центры', href: '#!' }, 
+    { text: 'IT', href: '#!' }, 
+  ]},
+])
+address.header__contacts
+  .header__icons
+    a(href='#!', title='Наш Telegram') #[+icon('telegram')]
+    a(href='#!', title='Наш WhatsApp') #[+icon('whatsapp', false)]
+  a.header__phone(href='#!') +7 (495) 555 35 35

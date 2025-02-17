@@ -1,0 +1,15 @@
+/*! Main footer rules */
+
+@use '../abstracts' as *;
+
+.footer {
+  min-width: rem($container-min-width);
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--color-black);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

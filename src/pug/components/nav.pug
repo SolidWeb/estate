@@ -1,0 +1,30 @@
+//- ** Nav component
+
+mixin nav(links, props = {})
+  nav.nav&attributes(attributes)
+    .nav-container
+      ul.nav__list
+        +navLinks(links, props)
+      if (props.navbar)
+        //- Navbar only related blocks (e.g., for mobile menu)
+        //- .mobile-navbar-logo, .mobile-navbar-auth, ...
+
+mixin navLinks(links, props, level = 1)
+  each link in links
+    - var dropdown = link.submenu !== undefined;
+    - var hoverable = dropdown && props.hoverable;
+    li.nav__item(data-dropdown=dropdown, data-dropdown-hover=hoverable)
+      a.nav__link(
+        href=link.href,
+        class=link.cssClass,
+        class={ 'is-active': link.href === pageUrl + '.html' },
+        class={ 'nav__sublist-toggler': link.submenu },
+        class=link.submenu ? `nav__sublist-toggler-level-${level}` : '',
+        data-dropdown-button=dropdown
+      ) !{ link.text }
+        if (link.icon)
+          +icon(link.icon)
+      if (link.submenu)
+        .nav__sublist-container(class=`nav__sublevel-${level}`, data-dropdown-container=dropdown)
+          ul.nav__sublist
+            +navLinks(link.submenu, level + 1)

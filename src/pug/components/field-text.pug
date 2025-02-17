@@ -1,0 +1,31 @@
+//- ** General text-related form elements
+
+mixin fieldText(props, prefix)
+  +fieldLabel(props.wrapper, props.idName, props.label, props.type, prefix)
+    if (props.type === 'textarea')
+      textarea.form__text-input.custom-scroll(
+        class=`input-${props.type}`,
+        id=prefix + '-' + props.idName,
+        name=prefix + '-' + props.idName,
+        placeholder=props.placeholder,
+        value=props.value,
+        required=props.required
+      )&attributes(props.attrs)
+    if (['text', 'email', 'tel', 'password'].includes(props.type))
+      if (props.type === 'password' && props.showVisibilityToggler)
+        span.text-input-wrapper
+          span.password-toggler(role='button', aria-label='Show/Hide password', tabindex='-1')
+          +inputText(props, prefix)
+      else
+        +inputText(props, prefix)
+
+mixin inputText(props, prefix)
+  input.form__text-input(
+    class=`input-${props.type}`,
+    type=props.type,
+    id=prefix + '-' + props.idName,
+    name=prefix + '-' + props.idName,
+    placeholder=props.placeholder,
+    value=props.value,
+    required=props.required
+  )&attributes(props.attrs)

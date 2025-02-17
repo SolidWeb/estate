@@ -1,0 +1,13 @@
+//- ** File upload component
+
+mixin fieldFile(props, prefix)
+  +fieldLabel(props.wrapper, props.idName, props.label, props.type, prefix).ellipsis
+    input.input-file(
+      type='file',
+      id=prefix + '-' + props.idName,
+      name=prefix + '-' + props.idName,
+      accept=props.accept,
+      multiple=props.multiple,
+      required=props.required
+    )&attributes(props.attrs)
+    +icon('paper-clip')

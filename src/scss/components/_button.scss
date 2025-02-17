@@ -1,0 +1,70 @@
+/*! Buttons */
+
+@use '../abstracts' as *;
+
+.button {
+  --bg-color: var(--color-primary);
+  --bg-color-rgb: var(--color-primary-rgb);
+  --color: var(--color-white);
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 2.4rem;
+  text-decoration: none;
+  text-align: center;
+  background-color: var(--bg-color);
+  color: var(--color);
+  transition-property: transform, opacity, var(--transition-props-color);
+  transition-timing-function: var(--transition-func-cubic);
+  transition-duration: var(--transition-duration-medium);
+  cursor: pointer;
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(var(--bg-color-rgb), 0.8);
+    color: var(--color);
+  }
+  &:active {
+    background-color: rgba(var(--bg-color-rgb), 0.7);
+    color: var(--color);
+  }
+}
+
+.button--secondary {
+  --bg-color: var(--color-secondary);
+  --bg-color-rgb: var(--color-secondary-rgb);
+}
+
+.close-button {
+  overflow: hidden;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 0;
+  background-color: transparent;
+  color: transparent;
+  transition: opacity var(--transition-medium-cubic);
+  user-select: none;
+  &:hover {
+    opacity: 0.6;
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: block;
+    width: 0.3rem;
+    height: 100%;
+    margin: 0 auto;
+    background-color: var(--color-black);
+    transform: rotate(45deg) translateX(0);
+  }
+  &::after {
+    transform: rotate(-45deg) translateX(0);
+  }
+}

@@ -1,0 +1,33 @@
+//** Mixins to generate background images' routine rules
+
+// Preferred usage is:
+//? @include bg-picture('image.jpg', 1280);
+//? @include bg-picture('body-bg.jpg', 1280, 'webp', 'body');
+
+@use './helpers' as *;
+@use 'sass:math';
+
+@mixin bg-picture-ruleset($image, $width, $format: null) {
+  @if $format {
+    $format: 'format=#{$format}';
+  }
+  background-image: url('@img/#{$image}?#{$format}&size=#{$width}');
+}
+
+@mixin bg-picture-imageset($image, $width, $format: null) {
+  @if $format {
+    $format: 'format=#{$format}';
+  }
+  background-image: image-set(url('@img/#{$image}?#{$format}&size=#{$width}') 1x, url('@img/#{$image}?#{$format}') 2x);
+}
+
+@mixin bg-picture($image, $original-width, $format: 'webp') {
+  $width: math.div($original-width, 2);
+
+  @include bg-picture-ruleset($image, $width); // .jpg|.png fallback
+  @include bg-picture-ruleset($image, $width, $format); // .webp
+
+  @include add-before-parent-selector('.webp ') {
+    @include bg-picture-imageset($image, $width, $format); // .webp .selector image-set()
+  }
+}

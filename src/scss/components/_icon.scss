@@ -1,0 +1,9 @@
+/*! Icons */
+
+@use '../abstracts' as *;
+
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  font-size: 1.8rem;
+}

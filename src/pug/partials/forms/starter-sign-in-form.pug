@@ -1,0 +1,32 @@
+//- prettier-ignore
++form([
+  { 
+    type: 'email',
+    idName: 'email',
+    label: 'Адрес электронной почты',
+    required: true
+  }, 
+  { 
+    type: 'password',
+    idName: 'password',
+    label: 'Пароль',
+    required: true
+  }, 
+  [
+    {type: 'fieldset', fieldsetClass: 'reset-password-fieldset'},
+    { 
+      type: 'checkbox',
+      idName: 'checkbox',
+      label: 'Запомнить меня',
+      checked: true
+    },
+    {
+      type: 'custom',
+      template: 'reset-password-link'
+    },
+  ],
+  {
+    type: 'submit',
+    submitText: 'Войти'
+  }
+], 'sign-in')

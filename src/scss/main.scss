@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+// Project-wide styling
+@use 'base/typography';
+@use 'base/globals';
+@use 'base/utils';
+
+// Components
+@use 'components/button';
+@use 'components/dialog';
+@use 'components/drawer';
+@use 'components/dropdown';
+@use 'components/form';
+@use 'components/icon';
+@use 'components/link';
+@use 'components/nav';
+@use 'components/navbar';
+@use 'components/overlay';
+@use 'components/scroll';
+@use 'components/swiper';
+@use 'components/validation';
+
+// Layout-related sections
+@use 'layout/header';
+@use 'layout/grail';
+@use 'layout/content';
+@use 'layout/footer';
+
+// Page-specific styles
+@use 'pages/index';
+
+// Themes
+@use 'themes/default';

@@ -1,0 +1,55 @@
+//** Auxiliary functions & mixins
+
+// Preferred usage is:
+//? rem(16px);
+//? em(24px);
+//? @include add-before-parent-selector('.webp ');
+//? index-to-key(1, $container-viewport-sizes));
+
+@use './variables' as *;
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:list';
+
+$browser-font-size: 16px; // Default browser font-size (100%)
+$html-font-size: 10px; // <html> font-size (62.5%)
+
+// Convert px into rem
+@function rem($px) {
+  @return math.div($px, $html-font-size) * 1rem;
+}
+
+// Convert px into em
+@function em($px) {
+  @return math.div($px, $html-font-size) * 1em;
+}
+
+// Remember, breakpoints in @media receive internal browser font-size value
+@function media-em($px) {
+  @if $system-font-scale {
+    // @media-breakpoints in em
+    @return math.div($px, $browser-font-size) * 1em;
+  } @else {
+    @return $px;
+  }
+}
+
+// Convert photoshop text tracking into em
+@function tracking($num) {
+  @return math.div($num, 1000) * 1em;
+}
+
+// Add new set of rules to parent selector chain
+// with $selector leading selector chain
+@mixin add-before-parent-selector($selector: null) {
+  @at-root #{$selector}#{&} {
+    @content;
+  }
+}
+
+// Get a key from a map by its index
+@function index-to-key($index, $map) {
+  $keys: map.keys($map);
+
+  @return list.nth($keys, $index);
+}

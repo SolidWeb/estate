@@ -1,0 +1,43 @@
+//** General layout variables
+
+@use 'sass:map';
+
+// Basic layout dimensions
+//! Including .container paddings
+//! From smallest to largest viewport size
+$container-viewport-sizes: (
+  // @media max-width when viewport < md
+  // -0.02px to exclude 1px media-less zone
+  // https://www.w3.org/TR/mediaqueries-4/#mq-min-max
+  'sm': 959.98px,
+  // @media min-width when viewport >= md
+  'md': 960px,
+  // @media min-width when viewport >= lg
+  'lg': 1200px
+);
+
+//! .container min-width, after which starts auto-scaling
+$container-min-width: 360px;
+//! .container max-width = $container-viewport-sizes largest key
+$container-max-width: 'lg';
+
+// Mobile navbar threshold, independent of $container-viewport-sizes
+$mobile-navbar-limit: 959.98px;
+
+// @media-query breakpoints
+//! The same keys as in $container-viewport-sizes
+$bp-sm: map.get($container-viewport-sizes, 'sm');
+$bp-md: map.get($container-viewport-sizes, 'md');
+$bp-lg: map.get($container-viewport-sizes, 'lg');
+
+// These are needed to prevent 1px overlapping zone
+// The smallest viewport size already has this fix (see $container-viewport-sizes above)
+// The largest viewport size is being considered as endpoint and doesn't need this fix
+$bp-md-max: $bp-lg - 0.02px;
+
+//! Excluding the smallest and the largest viewport sizes
+$bp-md-only: $bp-md, $bp-md-max;
+
+// If there is a need in responsiveness to user's system scale settings
+// Will change root font-size from px to % and @media-rules from px to em
+$system-font-scale: false;

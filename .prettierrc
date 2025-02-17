@@ -1,0 +1,29 @@
+{
+  "plugins": ["@prettier/plugin-pug"],
+  "singleQuote": true,
+  "tabWidth": 2,
+  "endOfLine": "auto",
+  "overrides": [
+    {
+      "files": "*.js",
+      "options": {
+        "printWidth": 120
+      }
+    },
+    {
+      "files": "*.pug",
+      "options": {
+        "attributeSeparator": "as-needed",
+        "parser": "pug",
+        "printWidth": 120
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "printWidth": 500,
+        "proseWrap": "preserve"
+      }
+    }
+  ]
+}

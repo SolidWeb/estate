@@ -1,0 +1,54 @@
+/*! Main header rules */
+
+@use '../abstracts' as *;
+
+.header {
+  min-width: rem($container-min-width);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--color-black);
+
+  .container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.header__logo {
+  display: block;
+  flex-shrink: 0;
+  width: 10rem;
+  height: 4.4rem;
+  @include bp(sm) {
+    width: 8rem;
+    height: 3.4rem;
+  }
+}
+
+.header__contacts {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 100%;
+  @include bp(sm) {
+    gap: 1rem;
+  }
+  @include bp-navbar {
+    flex-grow: 1;
+    justify-content: center;
+  }
+}
+
+.header__contact a {
+  line-height: 0;
+}
+
+.header__icons {
+  display: flex;
+  gap: 1rem;
+  a {
+    display: flex;
+    align-items: center;
+  }
+}

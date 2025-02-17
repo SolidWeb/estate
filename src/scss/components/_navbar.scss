@@ -1,0 +1,80 @@
+/*! Main navbar component */
+
+@use '../abstracts/' as *;
+
+.navbar {
+  display: flex;
+}
+
+.navbar-toggler {
+  display: none;
+}
+
+@include bp-navbar {
+  .navbar-toggler {
+    position: relative;
+    z-index: 101;
+    display: block;
+    order: 1;
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0 0.2rem;
+    border: 0;
+    background-color: transparent;
+  }
+
+  .navbar-burger {
+    --burger-color: red;
+
+    display: block;
+    width: 2.4rem;
+    height: 0.3rem;
+    background-color: var(--burger-color);
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.2rem;
+      width: 2.4rem;
+      height: 0.3rem;
+      background-color: var(--burger-color);
+      transition: transform var(--transition-long-cubic);
+    }
+    &::before {
+      transform: translateY(-0.7rem);
+    }
+    &::after {
+      transform: translateY(0.7rem);
+    }
+  }
+
+  .navbar-toggler[aria-expanded='true'] .navbar-burger {
+    background-color: transparent;
+    &::after,
+    &::before {
+      border-radius: 0;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .navbar {
+    .nav-container {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 0;
+    }
+
+    .nav__list {
+      flex-direction: column;
+      align-items: initial;
+      padding: min(20vh, 10rem) 3rem;
+    }
+  }
+}

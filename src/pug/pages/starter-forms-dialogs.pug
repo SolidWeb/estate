@@ -1,0 +1,29 @@
+extends ../main.pug
+
+block globals
+  - var pageUrl = 'starter-forms-dialogs';
+  - var pageTitle = 'Диалоги и формы';
+
+block scripts
+  script(defer, src='vendor/imask.min.js')
+  script(defer, src='vendor/just-validate.min.js')
+
+block dialogs
+  include @partials/dialogs/starter-dialog.pug
+
+block content
+  //- prettier-ignore
+  +breadcrumb([
+    { name: 'Home', link: 'index.html' },
+    { name: 'Forms & Dialogs', current: true }
+  ])
+  
+  h1.h1 Диалоги и формы
+  .forms
+    .form-wrapper
+      include @partials/forms/starter-form.pug
+      button.button.button--secondary(data-dialog-open='starter-application') Show modal
+
+    .form-wrapper
+      h2.form-legend Sign in form
+      include @partials/forms/starter-sign-in-form.pug

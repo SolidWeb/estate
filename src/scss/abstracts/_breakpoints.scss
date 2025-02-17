@@ -1,0 +1,81 @@
+//** Breakpoint system
+
+// Preferred usage is:
+//? @include bp(xl) {}
+//? @include bp-min-max(700px, 900px) {}
+
+@use './helpers' as *;
+@use './variables' as *;
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:list';
+
+// Remember, media queries accepts not :root / <html>
+// but internal browser font-size settings,
+// so em units should be used instead of rem.
+// Make use of media-em(px) helper function.
+
+//? @include bp-navbar
+@mixin bp-navbar {
+  @media (max-width: media-em($mobile-navbar-limit)) {
+    @content;
+  }
+}
+
+//? @include bp(xl)
+//! For predefined values only
+// The smallest viewport size is being generated as max-width
+// Other sizes are being generated as min-width
+@mixin bp($breakpoint) {
+  $raw-query: map.get($container-viewport-sizes, $breakpoint);
+
+  @if $raw-query {
+    $raw-query: media-em($raw-query);
+    $query: meta.inspect($raw-query);
+
+    $i: 'min';
+    @if (list.index(map.keys($container-viewport-sizes), $breakpoint) == 1) {
+      $i: 'max';
+    }
+
+    @media (#{$i}-width: #{$query}) {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. Make sure it is defined in `$container-viewport-sizes` map.';
+  }
+}
+
+//? @include bp-min(900px)
+//! For non-predefined values only
+//! Otherwise use @include bp(lg)
+@mixin bp-min($bp) {
+  @media (min-width: media-em($bp)) {
+    @content;
+  }
+}
+
+//? @include bp-max(1376px)
+//? @include bp-max($bp-lg-max)
+//! For the smallest viewport size use @include bp(xs)
+@mixin bp-max($bp-max) {
+  @media (max-width: media-em($bp-max)) {
+    @content;
+  }
+}
+
+//? @include bp-only($bp-lg-only)
+//! Excluding smallest and largest viewport sizes
+@mixin bp-only($bp-only) {
+  @media (min-width: media-em(list.nth($bp-only, 1))) and (max-width: media-em(list.nth($bp-only, 2))) {
+    @content;
+  }
+}
+
+//? @include bp-min-max(700px, 900px)
+//? @include bp-min-max($bp-md, $bp-lg-max)
+@mixin bp-min-max($bp, $bp-max) {
+  @media (min-width: media-em($bp)) and (max-width: media-em($bp-max)) {
+    @content;
+  }
+}

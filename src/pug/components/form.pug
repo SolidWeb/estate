@@ -1,0 +1,71 @@
+//- ** Form generator
+
+//- ?
+  inputs [array]:
+    {object} represents single .form__field container with the following generated content:  
+      - type (string): The type of the generated form element
+        · text: input[type='text']
+        · email: input[type='email']
+        · tel: input[type='tel']
+        · textarea: <textarea>
+        · file: input[type='file']
+        · checkbox: input[type='checkbox']
+        · custom: Any html code via templates from the field-custom.pug component
+      - wrapper (boolean): If the input should be wrapped in the label-wrapper
+      - cssClass (string): Additional css class for the .form__field container
+      - id (string): Element's id to associate with the corresponding label
+      - name (string): Element's name attribute
+      - label (string): Element's <label> text (supports any html code)
+      - placeholder (string): Element's placeholder text
+      - value (string): Element's initial value
+      - required (boolean): If the element is required
+      - checked (boolean): If the checkbox is checked
+      - accept (string): Accepted file types for the input[type='file']
+      - template (string): Name of the custom template being inserted from the field-custom.pug component
+      - submitText (string): Submit form button text
+    [array] represents a <fieldset> container which wraps included .form__field elements
+      - {object}[0] Includes properties for the <fieldset>
+        · type ('fieldset'): Mandatory property for the correct generation of the <fieldset>
+        · cssClass (string): Additional css class for the .form__fieldset container
+        · legend (string): <legend> text for the <fieldset>
+      - {object}[>0] Recursively called .form__field containers
+
+mixin form(inputs, prefix, method, action)
+  form.form(method=method, action=action, class=prefix ? prefix + '-form' : '')&attributes(attributes)
+    +formFields(inputs, prefix)
+
+mixin formFields(fields, prefix)
+  each field in fields
+    if (field.type === 'fieldset')
+      - continue
+    if (Array.isArray(field))
+      fieldset.form__fieldset(class=field[0].fieldsetClass)
+        if (field[0].legend)
+          legend.form-legend #{ field[0].legend }
+        +formFields(field, prefix)
+    else
+      case field.type
+        when 'checkbox'
+          .form__field.checkbox-field(class=field.fieldClass)
+            +fieldCheckbox(field, prefix)
+        when 'radio'
+          fieldset.form__fieldset.radio-fieldset(class=field.fieldsetClass, class={ 'radio-fieldset--required': field.required }) 
+            +fieldRadio(field, prefix)
+        when 'password'
+          .form__field.password-field(class=field.fieldClass)
+            +fieldText(field, prefix)
+        when 'textarea'
+          .form__field.textarea-field(class=field.fieldClass)
+            +fieldText(field, prefix)
+        when 'file'
+          .form__field.file-field(class=field.fieldClass)
+            +fieldFile(field, prefix)
+        when 'custom'
+          .form__field.custom-field(class=field.fieldClass)
+            +fieldCustom(field)
+        when 'submit'
+          .form__field.submit-field(class=field.fieldClass)
+            +fieldSubmit(field)
+        default
+          .form__field.text-field(class=field.fieldClass)
+            +fieldText(field, prefix)

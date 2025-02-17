@@ -1,0 +1,145 @@
+/*! Typography settings */
+
+@use 'sass:map';
+@use 'sass:list';
+
+//? Common weight name mapping
+// 100 > Thin (Hairline)
+// 200 > Extra Light (Ultra Light)
+// 300 > Light
+// 400 > Normal (Regular)
+// 500 > Medium
+// 600 > Semi Bold (Demi Bold)
+// 700 > Bold
+// 800 > Extra Bold (Ultra Bold)
+// 900 > Black (Heavy)
+
+$fonts: (
+  'Montserrat Regular': (
+    'family': 'Montserrat',
+    'filename': 'montserrat-regular',
+    'alias': 'montserrat',
+    'style': normal,
+    'weight': 400,
+    'serif': sans-serif,
+    'root-var': '--font-regular',
+  ),
+  'Montserrat Medium': (
+    'family': 'Montserrat',
+    'filename': 'montserrat-medium',
+    'alias': 'montserrat',
+    'style': normal,
+    'weight': 500,
+    'serif': sans-serif,
+    'root-var': '--font-medium',
+  ),
+);
+
+// Create separated css variables for each font
+// Requires separated font names and root-vars in $fonts,
+// e.g. 'Montserrat Medium Italic', 'root-var': '--font-medium-italic'
+$separated-font-vars: false;
+$separated-font-classes: true;
+
+$font-names: map.keys($fonts);
+
+// Generate @font-face rules
+@each $font, $props in $fonts {
+  $i: list.index(($fonts), ($font $props));
+  $filename: map.get($props, filename);
+  @font-face {
+    @if $separated-font-vars {
+      font-family: list.nth($font-names, $i);
+    } @else {
+      font-family: map.get($props, family);
+    }
+    src: url('@fonts/#{$filename}.woff2') format('woff2');
+    font-weight: map.get($props, weight);
+    font-style: map.get($props, style);
+    font-display: fallback;
+  }
+}
+
+// Generate font variables
+:root {
+  //! General font variables goes here
+  // Add a variable for each font if $separated-font-classes are being used
+  --font-montserrat: 'Montserrat', sans-serif;
+
+  @if $separated-font-vars {
+    @each $font, $props in $fonts {
+      $i: list.index(($fonts), ($font $props));
+      $root-var: map.get($props, root-var);
+      $font-name: list.nth($font-names, $i);
+      $font-serif: map.get($props, serif);
+
+      #{$root-var}: $font-name, $font-serif;
+    }
+  }
+}
+
+// Generate separated font classes:
+// .f-400, .f-500-i, .f-inter-700 etc...
+@if $separated-font-classes {
+  @each $font, $props in $fonts {
+    $i: list.index(($fonts), ($font $props));
+    $font-family: map.get($props, family);
+    $font-style: map.get($props, style);
+    $font-weight: map.get($props, weight);
+    $font-serif: map.get($props, serif);
+    $font-alias: map.get($props, alias);
+    @if $font-alias {
+      $font-alias: $font-alias + '-';
+    }
+    $root-var: map.get($props, root-var);
+
+    @if $font-style == 'normal' {
+      .f-#{$font-alias}#{$font-weight} {
+        @if $separated-font-vars {
+          font-family: var(#{$root-var});
+        } @else {
+          @if $font-alias {
+            font-family: var(--font-#{map.get($props, alias)});
+          }
+          font-weight: $font-weight;
+        }
+      }
+    }
+
+    @if $font-style == 'italic' {
+      .f-#{$font-alias}#{$font-weight}-i {
+        @if $separated-font-vars {
+          font-family: var(#{$root-var});
+        } @else {
+          @if $font-alias {
+            font-family: $font-family, $font-serif;
+          }
+          font-weight: $font-weight;
+          font-style: $font-style;
+        }
+      }
+    }
+  }
+}
+
+// Necessary class to include @font-face rules in critical CSS
+.critical-css-font-carrier {
+  @if $separated-font-vars {
+    @each $font, $props in $fonts {
+      $i: list.index(($fonts), ($font $props));
+      $font-name: list.nth($font-names, $i);
+
+      font-family: $font-name;
+    }
+  } @else {
+    //! List each font family here
+    font-family: var(--font-montserrat);
+  }
+}
+
+// Atomic typography classes
+.f-body {
+  font-family: var(--text-body-ff);
+  font-size: var(--text-body-fz);
+  line-height: var(--text-body-lh);
+}

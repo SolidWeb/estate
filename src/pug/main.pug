@@ -1,0 +1,31 @@
+include ./components/components.pug
+block globals
+doctype html
+html.webp.no-js(lang='ru')
+  head
+    meta(charset='utf-8')
+    title #{ pageTitle }
+    meta(name='description', content='Page description')
+    meta(name='keywords', content='key, words')
+    meta(name='viewport', content='width=device-width, initial-scale=1, viewport-fit=cover')
+    include @partials/layout/favicon.pug
+    include @partials/layout/fonts.pug
+    block fonts
+    block styles
+    link(href=require('../scss/main.scss'), rel='stylesheet')
+    if (pageUrl !== 'index')
+      link(href=require('../scss/pages.scss'), rel='stylesheet')
+    block scripts
+    script(defer, src=require('../js/main.js'))
+  body(class=pageUrl === 'index' ? 'homepage' : pageUrl + '-page', class=bodyClass)
+    header.header
+      .container
+        include @partials/layout/header.pug
+    .page-wrapper.container
+      main.main
+        block content
+    footer.footer
+      .container
+        include @partials/layout/footer.pug
+    block dialogs
+    block embedded-scripts

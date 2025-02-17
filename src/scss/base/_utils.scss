@@ -1,0 +1,30 @@
+/*! Reusable utility classes */
+
+@use '../abstracts' as *;
+
+// Visually hidden, accessible, doesn't take up space in the DOM
+.offscreen {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0 0 0 0);
+}
+
+// Truncate single line text
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Truncate multi-line text
+.truncate-box {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}

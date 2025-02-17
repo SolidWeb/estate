@@ -1,0 +1,56 @@
+/* Default theme settings */
+
+:root {
+  // Pure Colors
+  --color-primary: #670;
+  --color-primary-rgb: 102, 119, 0;
+  --color-secondary: #188;
+  --color-secondary-rgb: 17, 136, 136;
+  --color-accent: #808;
+  --color-blue: blue;
+  --color-red: red;
+  --color-grey-1: gainsboro;
+  --color-grey-2: grey;
+  --color-grey-3: darkgrey;
+  --color-black: black;
+  --color-white: white;
+
+  // UI Colors
+  --html-bg-color: var(--color-white);
+  --text-body-color: var(--color-black);
+  --tab-focus-color: var(--color-black);
+  --content-link-color: var(--color-blue);
+  --content-link-color-hover: var(--color-red);
+  --content-link-color-active: var(--color-blue);
+
+  // UI Effects
+  --shadow-dialog: 0 30px 50px 0 rgba(0, 0, 0, 0.75);
+  --shadow-menu: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+
+  // Transitions
+  --transition-props-color: color, background-color, border-color, text-decoration-color;
+  --transition-func-cubic: cubic-bezier(0.4, 0.8, 0.4, 1);
+  --transition-duration-short: 0.1s;
+  --transition-duration-medium: 0.2s;
+  --transition-duration-long: 0.3s;
+  --transition-short-cubic: var(--transition-duration-short) var(--transition-func-cubic);
+  --transition-medium-cubic: var(--transition-duration-medium) var(--transition-func-cubic);
+  --transition-long-cubic: var(--transition-duration-long) var(--transition-func-cubic);
+
+  // UI Transitions
+  --transition-overlay: visibility 0.3s, opacity 0.3s;
+}
+
+:root,
+::backdrop {
+  --color-overlay-bg: rgba(0, 0, 0, 0.5);
+  --color-stack-overlay-bg: rgba(0, 0, 0, 0.2);
+}
+
+// Atomic theme classes
+.c-primary {
+  color: var(--color-primary);
+}
+.c-secondary {
+  color: var(--color-secondary);
+}

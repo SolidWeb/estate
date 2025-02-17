@@ -1,0 +1,72 @@
+//- ** Picture set of images
+
+- const defaultSizes = ['-md', '']; // image-lg.jpg, image-md.jpg, image.jpg
+- const defaultBreakpoints = ['431', ''];
+- const modernFormat = 'webp';
+- const dprList = [1, 2];
+
+-
+  const responsivePath = (name, size, src) => {
+    const n = path.parse(name);
+    return src + n.dir + '/' + n.name + size + n.ext;
+  }
+
+//-? +picture('photo.jpg', 'Photo of a flower')
+//-? +picture('dir/photo.jpg', 'Photo of a flower', [''])
+//-? +picture('dir/photo.jpg', 'Photo of a flower', ['-lg', '-md', ''], ['1180', '640', ''])
+mixin picture(name, alt, sizes = defaultSizes, breakpoints = defaultBreakpoints, src = '@img/')
+  - const imageFormat = path.extname(name).split('.').join('');
+  - const formats = new Array(0).concat(modernFormat, imageFormat);
+
+  picture
+    each size, sizeIndex in sizes
+      - const source = responsivePath(name, size, src);
+      - const dimensions = sizeOfImage(source.replace('@img', 'src/img'));
+      - const media = breakpoints[sizeIndex] / 16 + 'em';
+      - const mediaPX = breakpoints[sizeIndex] + 'px'; // Important fallback for iDevices
+
+      each format, formatIndex in formats
+        - let srcset = '';
+        each dpr in dprList
+          if dpr === 1
+            - srcset += require(source + '?' + '&size=' + dimensions.width / 2 + '&format=' + format) + ' ' + dpr + 'x' + ',';
+          else
+            - srcset += require(source + '?' + '&size=' + dimensions.width + '&format=' + format) + ' ' + dpr + 'x';
+
+        if sizeIndex !== sizes.length - 1
+          source(
+            type=`image/${format.replace('jpg', 'jpeg')}`,
+            media='(min-width: ' + media + ') and (min-width: ' + mediaPX + ')',
+            srcset!=srcset
+          )
+        else if formatIndex !== formats.length - 1
+          source(type=`image/${modernFormat}`, srcset!=srcset)
+          - const srcsetDefault = srcset.replaceAll('=' + modernFormat, '=' + imageFormat);
+          img(
+            src=require(source + '?size=' + dimensions.width / 2),
+            srcset!=srcsetDefault,
+            width=`${Math.ceil(dimensions.width / 2)}`,
+            height=`${Math.ceil(dimensions.height / 2)}`,
+            alt=alt
+          )&attributes(attributes)
+
+//-? +pictureSVG('logo.svg', 'Site logo')
+//-? +pictureSVG('dir/logo.svg', 'Site logo', [''])
+//-? +pictureSVG('dir/logo.svg', 'Site logo', ['-lg', '-md', ''], ['1180', '640', ''])
+mixin pictureSVG(name, alt, sizes = defaultSizes, breakpoints = defaultBreakpoints, src = '@svg/')
+  - const dimensions = sizeOfImage(src.replace('@svg', 'src/svg') + name);
+
+  picture.picture-svg
+    each size, index in sizes
+      - const source = responsivePath(name, size, src);
+      - const media = breakpoints[index] / 16 + 'em';
+      - const mediaPX = breakpoints[index] + 'px'; // Important fallback for iDevices
+
+      if index !== sizes.length - 1
+        source(
+          type='image/svg+xml',
+          media='(min-width: ' + media + ') and (min-width: ' + mediaPX + ')',
+          srcset=require(source)
+        )
+      else
+        img(src=require(source), width=dimensions.width, height=dimensions.height, alt=alt)&attributes(attributes)

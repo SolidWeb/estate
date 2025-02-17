@@ -1,0 +1,8 @@
+# Stylelint configuration
+.stylelintrc
+
+# Vendor libraries
+/src/vendor/**/*
+
+# Compiled code
+/dist/**/*

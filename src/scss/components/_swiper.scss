@@ -1,0 +1,79 @@
+/*! Swiper.js */
+
+@use '../abstracts' as *;
+
+.swiper {
+  min-width: 0;
+  width: 100%;
+  user-select: none;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-color: var(--color-red);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 0;
+  user-select: none;
+
+  &.swiper-button-lock {
+    display: none;
+  }
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  --swiper-navigation-size: 2rem;
+
+  content: '>';
+  width: initial;
+  height: initial;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+.swiper-button-prev:after {
+  content: '<';
+}
+
+.swiper-controls {
+  position: absolute;
+  right: 2rem;
+  bottom: 0.5rem;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background-color: var(--color-white);
+  user-select: none;
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 0;
+    right: 0;
+    z-index: 11;
+    width: 2.5rem;
+    height: 3rem;
+    margin-top: 0;
+  }
+
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper-pagination {
+    position: initial;
+  }
+}
+
+.swiper--reverse {
+  transform: rotate(180deg);
+  .swiper-slide,
+  .swiper-controls {
+    transform: rotate(-180deg);
+  }
+}

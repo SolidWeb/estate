@@ -1,0 +1,13 @@
+# build folder
+/dist
+
+# dependencies
+/node_modules
+
+# env files
+.env
+.env*.local
+
+# IDE settings
+/.idea
+*.iml

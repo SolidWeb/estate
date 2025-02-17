@@ -1,0 +1,15 @@
+//- ** Main navbar
+
+mixin navbar(links)
+  button.navbar-toggler(
+    data-drawer-toggle='navbar',
+    aria-label='Toggle Main Menu',
+    aria-controls='main-nav',
+    aria-expanded='false'
+  )
+    span.navbar-burger
+
+  +nav(links, { navbar: true, hoverable: true })#main-nav.navbar.drawer.drawer--rtl(
+    data-drawer='navbar',
+    aria-label='Main Menu'
+  )&attributes(attributes)

@@ -1,0 +1,44 @@
+/* Scroll related rules */
+
+@use '../abstracts' as *;
+
+/* Webkit based browsers */
+
+.custom-scroll,
+.nav__sublist,
+.dropdown-content {
+  --track-width: 0.5rem;
+  --track-vertical-offset: 1rem;
+  --track-color: var(--color-grey-1);
+  --thumb-width: 0.5rem;
+  --thumb-color: var(--color-grey-2);
+  --thumb-hover-color: var(--color-grey-3);
+
+  &::-webkit-scrollbar {
+    width: var(--track-width);
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 1rem;
+    margin-top: var(--track-vertical-offset);
+    margin-bottom: var(--track-vertical-offset);
+    background-color: var(--track-color);
+  }
+  &::-webkit-scrollbar-thumb {
+    width: var(--thumb-width);
+    border-radius: 1rem;
+    background-color: var(--thumb-color);
+    &:hover {
+      background-color: var(--thumb-hover-color);
+    }
+  }
+}
+
+/* Firefox fallback */
+
+@-moz-document url-prefix() {
+  .custom-scroll {
+    scrollbar-width: thin;
+    // First value: thumb, second value: track
+    scrollbar-color: var(--thumb-color) var(--track-color);
+  }
+}

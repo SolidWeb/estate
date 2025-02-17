@@ -1,0 +1,59 @@
+/*! Drawer component */
+
+@use '../abstracts/' as *;
+
+.drawer {
+  position: fixed;
+  top: 0;
+  z-index: 101;
+  overflow: auto;
+  width: min(45rem, 85%);
+  height: 100%;
+  background-color: var(--color-white);
+  transition: transform var(--transition-long-cubic);
+
+  &.navbar {
+    @media (min-width: media-em($mobile-navbar-limit + 0.02)) {
+      position: static;
+      z-index: initial;
+      overflow: initial;
+      width: initial;
+      height: initial;
+      background-color: transparent;
+      transform: none;
+      transition: none;
+    }
+  }
+}
+
+//? From right to left
+.drawer--rtl {
+  right: 0;
+  transform: translateX(100%);
+}
+//? From left to right
+.drawer--ltr {
+  left: 0;
+  transform: translateX(-100%);
+}
+//? From top to bottom
+.drawer--ttb {
+  transform: translateY(-100%);
+}
+//? From bottom to top
+.drawer--btt {
+  top: initial;
+  bottom: 0;
+  transform: translateY(100%);
+}
+
+.drawer.is-active {
+  &.drawer--rtl,
+  &.drawer--ltr {
+    transform: translateX(0%);
+  }
+  &.drawer--ttb,
+  &.drawer--btt {
+    transform: translateY(0%);
+  }
+}

@@ -1,0 +1,402 @@
+/*! Initial styling for basic html-elements */
+
+@use '../abstracts' as *;
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  // outline: 1px solid lime;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  &:focus {
+    outline: none;
+  }
+  &:not(input, textarea, .button):focus-visible {
+    outline: 1px dashed var(--tab-focus-color);
+    outline-offset: 0.5rem;
+  }
+}
+
+html {
+  height: 100%;
+  // Improve consistency of default fonts in all browsers
+  font-family: system-ui, '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  @if $system-font-scale {
+    // 1rem = 10px
+    font-size: 62.5%;
+  } @else {
+    font-size: 10px;
+  }
+  background-color: var(--html-bg-color);
+  scroll-behavior: smooth;
+  // Disable blue tap highlight on touch screens
+  -webkit-tap-highlight-color: transparent;
+  // Prevent adjustments of font size after orientation changes in iOS
+  -webkit-text-size-adjust: 100%;
+  color-scheme: normal;
+
+  &.has-scrollbar {
+    overflow-y: scroll;
+    // Firefox
+    overflow-x: unset;
+  }
+}
+
+body {
+  --text-body-ff: var(--font-montserrat);
+  --text-body-fz: 1.8rem;
+  --text-body-lh: 1.5;
+
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  min-width: rem($container-min-width);
+  min-height: 100%;
+  height: auto;
+  font-family: var(--text-body-ff);
+  font-size: var(--text-body-fz);
+  line-height: var(--text-body-lh);
+  font-weight: 400;
+  color: var(--text-body-color);
+  // MacOS browsers' font display
+  -webkit-font-smoothing: antialiased;
+  // Change oldstyle figures to lining numeric via font feature
+  font-variant-numeric: lining-nums;
+  @include bp-max($container-min-width) {
+    overflow-x: auto;
+  }
+
+  &.no-transitions * {
+    transition: none !important;
+    &::before,
+    &::after {
+      transition: none !important;
+    }
+  }
+  &.is-locked {
+    position: fixed;
+    width: 100%;
+  }
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+  font-weight: 500;
+}
+
+h1,
+.h1 {
+  font-size: 3rem;
+}
+
+.h1 {
+  margin-bottom: 1.6rem;
+}
+
+h2,
+.h2 {
+  font-size: 2.4rem;
+}
+
+.h2 {
+  margin-bottom: 1.2rem;
+}
+
+h3,
+.h3 {
+  font-size: 2rem;
+}
+
+.h3 {
+  margin-bottom: 1rem;
+}
+
+.p {
+  margin-bottom: 1.6rem;
+}
+
+br.sm {
+  @include bp(md) {
+    display: none;
+  }
+}
+
+br.md {
+  @include bp(sm) {
+    display: none;
+  }
+}
+
+br.md-only {
+  display: none;
+  @include bp-only($bp-md-only) {
+    display: initial;
+  }
+}
+
+br.lg {
+  display: none;
+  @include bp(lg) {
+    display: initial;
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+  list-style-position: inside;
+}
+
+.ul,
+.ol,
+.p {
+  margin-bottom: 1.6rem;
+}
+
+a {
+  --color: var(--content-link-color);
+  --color-hover: var(--content-link-color-hover);
+  --color-active: var(--content-link-color-active);
+
+  text-decoration-color: transparent;
+  color: var(--color);
+  transition-property: var(--transition-props-color);
+  transition-timing-function: var(--transition-func-cubic);
+  transition-duration: var(--transition-duration-short);
+  &:hover,
+  &:focus-visible {
+    text-decoration-color: currentColor;
+    color: var(--color-hover);
+  }
+  &:active {
+    color: var(--color-active);
+  }
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  // Change the font styles in all browsers
+  font-family: inherit;
+  font-size: 100%;
+  // The same as the body line-height value, won't inherit
+  line-height: var(--text-body-lh);
+  font-weight: inherit;
+  font-variant-numeric: inherit;
+  // The default color of the browser input element is fieldtext
+  color: inherit;
+}
+
+button,
+select {
+  // Remove the inheritance of text transform in Firefox
+  text-transform: none;
+  user-select: none;
+}
+
+select {
+  // Prevent flickering while custom select lib is loading
+  visibility: hidden;
+}
+
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+  // Correct the inability to style clickable types in iOS and Safari
+  -webkit-appearance: button;
+}
+
+button,
+input[type='submit'] {
+  display: block;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input[type='search'] {
+  // Correct the odd appearance in Chrome and Safari
+  -webkit-appearance: textfield;
+  // Correct the outline style in Safari
+  outline-offset: -2px;
+}
+
+// Hide default quantity arrows
+input[type='number'] {
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+progress {
+  // Add the correct vertical alignment in Chrome and Firefox
+  vertical-align: baseline;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  box-sizing: content-box;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.picture-svg img {
+  // Correct initial appearance in Firefox
+  width: revert-layer;
+}
+
+.inline-svg {
+  // Disable title tooltip for inlined svg elements
+  pointer-events: none;
+}
+
+address {
+  font-style: normal;
+}
+
+table {
+  table-layout: fixed;
+  // Remove text indentation from table contents in Chrome and Safari
+  text-indent: 0;
+  // Correct table border color inheritance in all Chrome and Safari
+  border-color: inherit;
+  // Remove default table spacing & keep border-radius ability
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+hr {
+  display: block;
+  // Add the correct height in Firefox
+  height: 0.1rem;
+  border: none;
+  background-color: var(--color-black);
+  // Correct the inheritance of border color in Firefox
+  color: inherit;
+}
+
+.hr {
+  height: 0.1rem;
+  border: none;
+  margin: 2rem 0;
+  background-color: var(--color-black);
+}
+
+abbr[title] {
+  // Add the correct text decoration in Chrome, Edge, and Safari
+  text-decoration: underline dotted;
+}
+
+b,
+strong {
+  // Add the correct font weight in Edge and Safari
+  font-weight: bolder;
+}
+
+code,
+kbd,
+samp,
+pre {
+  // Improve consistency of default fonts in all browsers
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  // Correct the odd 'em' font sizing in all browsers
+  font-size: 1em;
+}
+
+small {
+  // Add the correct font size in all browsers
+  font-size: 80%;
+}
+
+sub,
+sup {
+  position: relative;
+  vertical-align: baseline;
+  font-size: 75%;
+  // Prevent 'sub' and 'sup' elements from affecting the line height in all browsers
+  line-height: 0;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+summary {
+  // Add the correct display in Chrome and Safari
+  display: list-item;
+}
+
+iframe {
+  border: none;
+}
+
+::-moz-focus-inner {
+  // Remove the inner border and padding in Firefox
+  padding: 0;
+  border-style: none;
+}
+
+:-moz-focusring {
+  // Restore the focus styles unset by the previous rule
+  outline: 1px dotted ButtonText;
+}
+
+// Remove the additional ':invalid' styles in Firefox
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  // Correct the cursor style of increment and decrement buttons in Safari
+  height: auto;
+}
+
+::-webkit-search-decoration {
+  // Remove the inner padding in Chrome and Safari on macOS
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  // Correct the inability to style clickable types in iOS and Safari
+  -webkit-appearance: button;
+  // Change font properties to 'inherit' in Safari
+  font: inherit;
+}

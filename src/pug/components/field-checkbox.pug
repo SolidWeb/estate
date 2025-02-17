@@ -1,0 +1,11 @@
+//- ** Checkbox component
+
+mixin fieldCheckbox(props, prefix)
+  +fieldLabel(props.wrapper, props.idName, props.label, props.type, prefix)
+    input.input-checkbox(
+      type='checkbox',
+      id=prefix + '-' + props.idName,
+      name=prefix + '-' + props.idName,
+      required=props.required,
+      checked=props.checked
+    )&attributes(props.attrs)
