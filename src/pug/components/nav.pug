@@ -10,8 +10,8 @@ mixin nav(links, props = {})
           a.drawer__phone(href='tel:+79998548585') +7 999 854 85 85 — Москва
           a.drawer__phone(href='tel:+79144873838') +7 914 487 38 38 — Владивосток
         .navbar-socials
-          a(href='#!', title='Наш Telegram') #[+icon('telegram')]
-          a(href='#!', title='Наш WhatsApp') #[+icon('whatsapp')]
+          a(href='#!', aria-label='Telegram') #[+icon('telegram')]
+          a(href='#!', aria-label='WhatsApp') #[+icon('whatsapp')]
 
 mixin navLinks(links, props, level = 1)
   each link in links

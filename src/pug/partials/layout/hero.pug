@@ -7,11 +7,11 @@ section.hero
   .hero__controls
     a.hero__button.button(href='#!') Связаться напрямую #[+icon('arrow')]
     .hero__socials
-      a.social-link(href='#!') #[+icon('linkedin')]
-      a.social-link(href='#!') #[+icon('insta')]
+      a.social-link(href='#!', aria-label='LinkedIn') #[+icon('linkedin')]
+      a.social-link(href='#!', aria-label='Instagram') #[+icon('insta')]
 
   .hero__person
     .hero__person-name Ярослав Попов
     .hero__person-caption СЕО Estate
 
-  .hero__image #[+picture('hero.png', 'Hero', [''])]
+  .hero__image #[+picture('hero.png', 'Hero')]
