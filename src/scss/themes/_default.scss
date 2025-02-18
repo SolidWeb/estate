@@ -3,22 +3,19 @@
 :root {
   // Pure Colors
   --color-primary: #0048ce;
-  --color-secondary: #188;
-  --color-accent: #808;
   --color-blue-light: #d9e4f8;
   --color-blue: #548fff;
   --color-blue-2: #799ee5;
+  --color-blue-3: #7d8cb4;
   --color-blue-dark: #003aa6;
-  --color-red: red;
   --color-gray: #6d6c72;
-  --color-grey-2: grey;
-  --color-grey-3: darkgrey;
+  --color-text: #111;
   --color-black: black;
   --color-white: white;
 
   // UI Colors
   --html-bg-color: var(--color-white);
-  --text-body-color: var(--color-black);
+  --text-body-color: var(--color-text);
   --tab-focus-color: var(--color-black);
   --content-link-color: var(--color-primary);
   --content-link-color-hover: var(--color-blue);

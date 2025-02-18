@@ -127,20 +127,22 @@ h1,
 
 h2,
 .h2 {
-  font-size: 2.4rem;
-}
-
-.h2 {
-  margin-bottom: 1.2rem;
+  @include clamp(2.1, 128, 3.6);
+  line-height: 133%;
+  color: var(--color-primary);
+  @include bp(md) {
+    line-height: 120%;
+  }
 }
 
 h3,
 .h3 {
   font-size: 2rem;
-}
-
-.h3 {
-  margin-bottom: 1rem;
+  line-height: 120%;
+  @include bp(md) {
+    font-size: 1.8rem;
+    line-height: 3rem;
+  }
 }
 
 .p {
