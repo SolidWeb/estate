@@ -23,8 +23,8 @@
 
 // Truncate multi-line text
 .truncate-box {
-  display: -webkit-box;
   overflow: hidden;
+  display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
 }

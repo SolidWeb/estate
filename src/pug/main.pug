@@ -13,14 +13,13 @@ html.webp.no-js(lang='ru')
     block fonts
     block styles
     link(href=require('../scss/main.scss'), rel='stylesheet')
-    if (pageUrl !== 'index')
-      link(href=require('../scss/pages.scss'), rel='stylesheet')
     block scripts
     script(defer, src=require('../js/main.js'))
   body(class=pageUrl === 'index' ? 'homepage' : pageUrl + '-page', class=bodyClass)
     header.header
       .container
         include @partials/layout/header.pug
+    include @partials/layout/hero.pug
     .page-wrapper.container
       main.main
         block content

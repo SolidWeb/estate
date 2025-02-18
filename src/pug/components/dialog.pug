@@ -1,8 +1,0 @@
-//- ** Dialog component
-
-//-? +dialog('application', 'false')
-mixin dialog(name, modal = true)
-  dialog.dialog-container(data-dialog=name, data-modal=modal)&attributes(attributes)
-    .dialog
-      block
-      button.dialog__close-button.close-button(data-dialog-close=name) Закрыть

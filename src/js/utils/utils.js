@@ -44,36 +44,10 @@ function checkWebp() {
   };
 }
 
-/* Check if the browser supports dialog element */
-export function checkDialog() {
-  document.addEventListener('DOMContentLoaded', function () {
-    const dialog = document.querySelector('dialog');
-    try {
-      dialog && dialog.close();
-    } catch (e) {
-      const head = document.getElementsByTagName('HEAD')[0];
-      const link = document.createElement('link');
-      const script = document.createElement('script');
-      const dialogs = document.querySelectorAll('dialog');
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = 'vendor/dialog-polyfill/dialog-polyfill.min.css';
-      script.src = 'vendor/dialog-polyfill/dialog-polyfill.min.js';
-      head.append(link, script);
-      script.addEventListener('load', () => {
-        dialogs.forEach((dialog) => {
-          dialogPolyfill.registerDialog(dialog);
-        });
-      });
-    }
-  });
-}
-
 export function initBrowserChecks() {
   checkJS();
   detectBrowser();
   checkWebp();
-  checkDialog();
 }
 
 /**

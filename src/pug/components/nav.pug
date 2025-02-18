@@ -6,7 +6,7 @@ mixin nav(links, props = {})
       ul.nav__list
         +navLinks(links, props)
       if (props.navbar)
-        .navbar-contacts
+        address.navbar-contacts
           a.drawer__phone(href='tel:+79998548585') +7 999 854 85 85 — Москва
           a.drawer__phone(href='tel:+79144873838') +7 914 487 38 38 — Владивосток
         .navbar-socials

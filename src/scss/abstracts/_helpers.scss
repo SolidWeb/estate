@@ -53,3 +53,9 @@ $html-font-size: 10px; // <html> font-size (62.5%)
 
   @return list.nth($keys, $index);
 }
+
+// Calculate clamp value accordingly to max viewport width
+// All values in 10px based rem
+@mixin clamp($min-fz: 1.2, $max-vw: 140, $max-fz: 1.6) {
+  font-size: clamp(#{$min-fz}rem, math.div($max-fz, $max-vw) * 100vw, #{$max-fz}rem);
+}

@@ -2,63 +2,157 @@
 
 @use '../abstracts/' as *;
 
-.graphic-snippets-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(34rem, 1fr));
-  gap: 2rem;
+/* Hero section */
 
-  &__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.hero {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: 128rem;
+  padding: 4.1rem 1.2rem 3.4rem 2.4rem;
+  border-radius: 1.6rem;
+  margin: 2rem auto 4rem;
+  background-color: var(--color-gray);
+  color: var(--color-white);
+  @include bp(sm) {
+    @include bg-picture('hero-bg.jpg', 750);
+    background-repeat: no-repeat;
+    background-size: cover;
   }
-}
-
-.picture {
-  width: 12.4rem;
-  height: 8.3rem;
-  margin: auto;
   @include bp(md) {
-    width: 24.8rem;
-    height: 16rem;
-  }
-}
-
-.picture-svg {
-  padding: 2rem 1rem;
-  border-radius: 3rem;
-  margin: auto;
-  background-color: brown;
-}
-
-.css-background-picture {
-  width: 13.5rem;
-  height: 18.5rem;
-  margin: auto;
-  @include bg-picture('starter/ficus.png', 270);
-}
-
-.inline-svg-wrapper {
-  margin: auto;
-  fill: black;
-  transition: fill var(--transition-medium-cubic);
-  .inline-svg path:nth-of-type(1) {
-    fill: green;
-    transition: fill var(--transition-medium-cubic);
+    padding: 8rem 6rem 8rem 10rem;
+    margin: 0 auto 9.2rem;
   }
 
-  &:hover {
-    fill: slateblue;
-    .inline-svg path:nth-of-type(1) {
-      fill: goldenrod;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    @include bg-picture('hero-ribbon-sm.png', 2582);
+    background-position: right calc(50% - 2.8rem) bottom -18.5rem;
+    background-repeat: no-repeat;
+    @include bp(md) {
+      @include bg-picture('hero-ribbon.png', 2560);
+      background-position: right bottom;
     }
   }
 }
 
-.dropdown-demo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  column-gap: 4rem;
-  row-gap: 2rem;
+.hero__content {
+  @include bp(md) {
+    max-width: 58%;
+  }
+  p {
+    margin-bottom: 0.8rem;
+    @include bp(md) {
+      margin-bottom: 1.2rem;
+    }
+  }
 }
+
+.hero__controls {
+  display: flex;
+  align-items: center;
+  gap: 4.9rem;
+  margin-top: 2.4rem;
+  @include bp(md) {
+    margin-top: 7.4rem;
+  }
+}
+
+.hero__button {
+  width: 100%;
+  max-width: 32.7rem;
+  @include bp(md) {
+    max-width: 29.6rem;
+  }
+
+  .icon {
+    position: relative;
+    top: -0.6rem;
+    height: 2.2rem;
+    font-size: 3.6rem;
+    @include bp(md) {
+      top: -0.7rem;
+      left: 0.1rem;
+      margin-left: -0.1rem;
+    }
+  }
+}
+
+.hero__socials {
+  display: flex;
+  gap: 1rem;
+  @include bp(sm) {
+    position: absolute;
+    right: 2.2rem;
+    bottom: 6.1rem;
+    flex-direction: row-reverse;
+  }
+  @include bp(md) {
+    position: relative;
+    top: 0.2rem;
+    gap: 1.3rem;
+  }
+}
+
+.social-link {
+  font-size: 2.4rem;
+  transition: transform var(--transition-medium-cubic);
+  .icon {
+    font-size: inherit;
+  }
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.2);
+  }
+  &:active {
+    transform: scale(1);
+  }
+}
+
+.hero__person {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-height: 5.6rem;
+  margin-top: 36.5rem;
+  @include bp(md) {
+    position: absolute;
+    right: 10.7rem;
+    bottom: 8rem;
+    margin-top: auto;
+  }
+}
+
+.hero__person-name {
+  font-family: var(--font-merriweather);
+  font-size: 2rem;
+  line-height: 120%;
+}
+
+.hero__person-caption {
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+}
+
+.hero__image {
+  position: absolute;
+  right: 2.6rem;
+  bottom: 0;
+  z-index: -1;
+  width: 32.3rem;
+  @include bp(md) {
+    // right: 10.6rem;
+    right: min(10.6rem, calc(((100vw - 100%) / 2) + 4rem));
+    bottom: -12px;
+    width: 46.3rem;
+  }
+}
+
+/* Staff section */

@@ -43,7 +43,7 @@ module.exports = {
           options: {
             context: 'src/', // keeping folder structure
             name: '[path][name]-[width]w.[ext]',
-            quality: 85,
+            quality: 90,
           },
         },
       },
@@ -83,11 +83,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          { loader: 'css-loader' },
-          { loader: 'postcss-loader' },
-          { loader: 'sass-loader' },
-        ],
+        use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }, { loader: 'sass-loader' }],
       },
       {
         test: /\.css$/,
@@ -113,9 +109,7 @@ module.exports = {
     new PugPlugin({
       entry: 'src/pug/pages/',
       css: {
-        filename: isProduction
-          ? 'css/[name].[contenthash:8].min.css'
-          : 'css/[name].[contenthash:8].css',
+        filename: isProduction ? 'css/[name].[contenthash:8].min.css' : 'css/[name].[contenthash:8].css',
       },
       hotUpdate: true,
       pretty: isProduction ? !minimizeHTML : true,
@@ -132,8 +126,7 @@ module.exports = {
             tag: 'link',
             filter: ({ value }) => {
               // Don't process non-.svg favicons
-              if (value.includes('favicon') && !value.endsWith('.svg'))
-                return false;
+              if (value.includes('favicon') && !value.endsWith('.svg')) return false;
               // Don't process vendor files
               if (value.includes('vendor')) return false;
             },
@@ -151,9 +144,9 @@ module.exports = {
         svgSpriteHash: svgSpriteHash,
       },
     }),
-    new CopyPlugin({
-      patterns: [{ from: 'src/vendor/', to: 'vendor/' }],
-    }),
+    // new CopyPlugin({
+    //   patterns: [{ from: 'src/vendor/', to: 'vendor/' }],
+    // }),
     new FaviconsWebpackPlugin({
       logo: 'src/img/favicon/favicon.svg',
       outputPath: 'img/favicon',
