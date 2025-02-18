@@ -1,2 +1,40 @@
-span © 2023
-button(data-scroll-to='top') Наверх
+.footer__col
+  a.footer__logo.logo(href='#!') Estate
+
+  address.footer__contacts
+    p Москва, БЦ «Лотос», ул. Ленинская, 19
+    a(href='tel:+79998548585') +7 999 854 85 85 — Москва
+    a(href='tel:+79144873838') +7 914 487 38 38 — Владивосток
+    a(href='mailto:hello@estate.ru') hello@estate.ru
+    .footer__socials
+      a(href='#!', title='Наш Telegram') #[+icon('telegram')]
+      a(href='#!', title='Наш WhatsApp') #[+icon('whatsapp')]
+
+.footer__col
+  .footer__links
+    +accordion(false, true)
+      +accordion-item('О компании', {expanded: 'true'})
+        //- prettier-ignore
+        +nav([ 
+          { text: 'О нас', href: '#!' }, 
+          { text: 'Команда', href: '#!' }, 
+          { text: 'Контакты', href: '#!' }, 
+          { text: 'Блог', href: '#!' },
+        ]).footer__nav
+      +accordion-item('Недвижимость')
+        //- prettier-ignore
+        +nav([ 
+          { text: 'Жилая', href: '#!' }, 
+          { text: 'Коммерческая', href: '#!' }, 
+          { text: 'Инвестиционная', href: '#!' },
+        ]).footer__nav
+      +accordion-item('Услуги')
+        //- prettier-ignore
+        +nav([ 
+          { text: 'По подбору недвижимости', href: '#!' }, 
+          { text: 'Юридическое сопровождение', href: '#!' },
+        ]).footer__nav
+
+  .footer__legals
+    p © 2025 Estate. Все права защищены. #[br.md-only]При копировании материалов сайта ссылка на&nbsp;источник&nbsp;обязательна.
+    p #[a(href='#!') Политика конфиденциальности] • #[a(href='#!') Соглашение об использовании] 

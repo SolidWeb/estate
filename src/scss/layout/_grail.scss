@@ -5,7 +5,10 @@
 
 .page-wrapper {
   flex: 1 0 auto;
-  padding-bottom: 2.5rem;
+  padding-bottom: 3.8rem;
+  @include bp(md) {
+    padding-bottom: 8rem;
+  }
 }
 
 .container {

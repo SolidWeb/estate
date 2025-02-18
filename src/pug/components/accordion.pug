@@ -1,0 +1,24 @@
+//- ** Accordion component
+
+//-?
+  +accordion(true)
+    +accordion-item('First accordion button text', true)
+      p First accordion panel content
+    +accordion-item('Second accordion button text')
+      p Second accordion panel content
+    +accordion-item('Third accordion button text')
+      p Third accordion panel content
+
+mixin accordion(multi = false, mobile = false)
+  .accordion(class={
+    'accordion--multi': multi,
+    'accordion--mobile': mobile,
+  })&attributes(attributes)
+    block
+
+mixin accordion-item(button = '', props = {})
+  .accordion-item&attributes(attributes)
+    .accordion-button(role='button', class=props.buttonClass, aria-expanded=props.expanded ? props.expanded : false) #[span.button-text !{ button }] #[+icon('chevron')]
+    .accordion-panel
+      .accordion-content
+        block

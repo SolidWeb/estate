@@ -4,12 +4,148 @@
 
 .footer {
   min-width: rem($container-min-width);
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--color-black);
+  padding: 2.2rem 0 3.5rem;
+  background-color: var(--color-blue-4);
+  @include bp(md) {
+    padding: 7.1rem 0 3.5rem;
+  }
 
   .container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    @include bp(md) {
+      flex-direction: row;
+      gap: 5%;
+    }
+    @include bp(lg) {
+      gap: 9.2%;
+    }
+  }
+}
+
+.footer__col {
+  @include bp(md) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &:first-child {
+      flex-shrink: 0;
+      width: 31.4rem;
+    }
+  }
+}
+
+.footer__logo {
+  margin-bottom: 1.8rem;
+  @include bp(md) {
+    margin-bottom: 11.1rem;
+  }
+}
+
+.footer__contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  color: var(--color-primary);
+  @include bp(md) {
+    gap: 0.8rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+  }
+}
+
+.footer__socials {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 1.7rem;
+  margin-left: -0.4rem;
+  @include bp(md) {
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+    margin-left: -0.2rem;
+  }
+
+  .icon {
+    font-size: 4.6rem;
+    @include bp(md) {
+      font-size: 5.1rem;
+    }
+  }
+
+  a {
+    display: inline-flex;
+    transition: transform var(--transition-medium-cubic);
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.1);
+    }
+    &:active {
+      transform: scale(1);
+    }
+  }
+}
+
+.footer__links {
+  margin-top: 1.7rem;
+
+  @include bp(md) {
+    margin-top: 0.3rem;
+    .accordion {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 2rem;
+      width: 100%;
+    }
+    .accordion-item {
+      min-width: 12.9rem;
+    }
+    .accordion-button {
+      color: var(--color-blue-2);
+    }
+  }
+  @include bp(lg) {
+    .accordion {
+      justify-content: flex-start;
+      gap: 8.7rem;
+    }
+    .accordion-item {
+      &:last-child {
+        margin-left: -0.5rem;
+      }
+    }
+  }
+}
+
+.footer__nav {
+  .nav__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    @include bp(md) {
+      gap: 0.6rem;
+    }
+  }
+  .nav__link {
+    @include bp(sm) {
+      font-size: 1.4rem;
+      line-height: 2.8rem;
+    }
+  }
+}
+
+.footer__legals {
+  margin-top: 1.9rem;
+  font-size: 1rem;
+  line-height: 1.8rem;
+  color: var(--color-primary);
+  opacity: 0.5;
+  @include bp(md) {
+    margin-top: auto;
+    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+    line-height: 2.4rem;
   }
 }
